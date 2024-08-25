@@ -60,6 +60,7 @@ class Home extends Controller
                             $row = mysqli_fetch_array($re);
                             if (isset($row["IDChuTro"])) {
                                 $idchutro = $row["IDChuTro"];
+                                setcookie('idchutro', $idchutro, time() + (86400 * 1), '/');
                                 $result = $this->show2->getInfor($idchutro);
                                 return $this->view("master1", [
                                     "Page" => "TrangChu",
@@ -121,6 +122,12 @@ class Home extends Controller
             }
         }
     }
+    public function loguot()
+    {
+        setcookie("iduser", "", time() - (86400 * 30), "/");
+        setcookie("idchutro", "", time() - (86400 * 30), "/");
+        header("Location:../");
+    }
     // public function check_verify_otp()
     // {
     //     $username = $_SESSION["username"];
@@ -163,9 +170,4 @@ class Home extends Controller
     //     }
     // }
 
-    public function loguot()
-    {
-        setcookie("iduser", "", time() - (86400 * 30), "/");
-        header("Location:../");
-    }
 }

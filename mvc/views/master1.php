@@ -11,6 +11,9 @@
 
 <body>
     <?php
+    require_once "../Web_Quanlytro/mvc/views/blocks/Header.php";
+    ?>
+    <?php
     require_once "../Web_Quanlytro/mvc/views/page/Admin/" . $data["Page"] . ".php";
     ?>
 

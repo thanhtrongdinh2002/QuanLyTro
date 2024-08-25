@@ -10,4 +10,3 @@ if (isset($data["data"])) {
     }
 }
 ?>
-<a href="./Loguot">Đăng Xuất</a>
