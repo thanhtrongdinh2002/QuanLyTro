@@ -31,7 +31,30 @@ class AdminModel extends DB
         $query = mysqli_query($this->conn, $sql);
         return $query;
     }
-
+    public function DS_Phong()
+    {
+        $sql = "SELECT * FROM phong";
+        $query = mysqli_query($this->conn, $sql);
+        return $query;
+    }
+    public function Them_LoaiPhong($idloaiphong, $tenloaiphong, $songuoi, $dientich, $giathue)
+    {
+        $sql = "INSERT INTO `loaiphong`(`IDLoaiPhong`, `TenLoaiPhong`, `SoNguoi`, `DienTich`, `GiaThue`) VALUES ('$idloaiphong', '$tenloaiphong', '$songuoi', '$dientich','$giathue')";
+        $query = mysqli_query($this->conn, $sql);
+        return $query;
+    }
+    public function Them_Phong($idphong, $idloaiphong, $tinhtrang, $STT, $idkhutro)
+    {
+        $sql = "insert into `phong` (IDPhong, IDLoaiPhong, STT, TinhTrang, IDKhuTro) values ('$idphong', '$idloaiphong', '$STT', '$tinhtrang', '$idkhutro')";
+        $query = mysqli_query($this->conn, $sql);
+        return $query;
+    }
+    public function Check_ID($idlp)
+    {
+        $sql = "SELECT * FROM loaiphong WHERE `IDLoaiPhong` = '$idlp'";
+        $query = mysqli_query($this->conn, $sql);
+        return $query;
+    }
     // public function editTaikhoan($uid)
     // {
     //     $sql = "SELECT * FROM taikhoan WHERE `uid` = $uid";

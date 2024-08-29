@@ -87,6 +87,63 @@ class admin extends Controller
             ]);
         }
     }
+    public function DS_Phong()
+    {
+        $idchutro = $_COOKIE["idchutro"];
+        $khuTroList = $this->show->DS_KhuTro($idchutro);
+
+        $khuTroIds = array();
+
+        foreach ($khuTroList as $khuTro) {
+            $khuTroIds[] = $khuTro['IDKhuTro'];
+        }
+        foreach ($khuTroIds as $khuTroId) {
+            $phongList = $this->show->DS_Phong($khuTroId);
+        }
+        return $this->view("master1", [
+            "Page" => "DS_Phong",
+            "data" => $phongList
+        ]);
+    }
+    public function Nhap_Phong()
+    {
+        $idchutro = $_COOKIE["idchutro"];
+        $result = $this->show->DS_KhuTro($idchutro);
+        $this->view("master1", [
+            "Page" => "Nhap_Phong",
+            "data" => $result
+        ]);
+    }
+
+    public function Them_Phong()
+    {
+        if (isset($_POST["TT_Phong"])) {
+            $idlp = rand(0, 999999);
+            $row = $this->show->Check_ID($idlp);
+            if (mysqli_num_rows($row) > 0) {
+                $idloaiphong = $idlp + rand(0, 999);
+            } else {
+                $idloaiphong = $idlp;
+            }
+            var_dump($row);
+            var_dump($idloaiphong);
+            $tenloaiphong = $_POST["TenLoaiPhong"];
+            $songuoi = $_POST["SoNguoi"];
+            $dientich = $_POST["DienTich"];
+            $giathue = $_POST["GiaThue"];
+            $tinhtrang = $_POST["TinhTrang"];
+            $STT = $_POST["STT"];
+            $idkhutro = $_POST["IDKhuTro"];
+            $idphong = rand(0, 999999);
+            $this->show->Them_LoaiPhong($idloaiphong, $tenloaiphong, $songuoi, $dientich, $giathue);
+            $this->show->Them_Phong($idphong, $idloaiphong, $tinhtrang, $STT, $idkhutro);
+            $result = $this->show->DS_Phong();
+            $this->view("master1", [
+                "Page" => "DS_Phong",
+                "data" => $result
+            ]);
+        }
+    }
 }
 
 
