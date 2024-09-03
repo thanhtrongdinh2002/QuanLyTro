@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2024 at 07:17 PM
+-- Generation Time: Sep 03, 2024 at 03:00 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -93,6 +93,7 @@ CREATE TABLE `khutro` (
 
 INSERT INTO `khutro` (`IDKhuTro`, `TenKhuTro`, `DiaChi`, `SoPhong`, `KinhDo`, `ViDo`, `IDChuTro`) VALUES
 (31005038, 'nhaf ma', 'can tho', 0, 14.00000000, 11.00000000, 451286707),
+(755912168, 'nhaf ma 1', 'can tho', 0, 14.00000000, 11.00000000, 451286707),
 (785146244, 'nhaf ma 1', 'can tho', 0, 14.00000000, 11.00000000, 451286707);
 
 -- --------------------------------------------------------
@@ -109,6 +110,15 @@ CREATE TABLE `loaiphong` (
   `GiaThue` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `loaiphong`
+--
+
+INSERT INTO `loaiphong` (`IDLoaiPhong`, `TenLoaiPhong`, `SoNguoi`, `DienTich`, `GiaThue`) VALUES
+(254150, 'phong cux', 2, 12, 120000),
+(289313, 'phong cux', 2, 12, 120000),
+(915064, 'phong cux', 2, 12, 120000);
+
 -- --------------------------------------------------------
 
 --
@@ -121,9 +131,15 @@ CREATE TABLE `phong` (
   `TinhTrang` varchar(200) NOT NULL,
   `IDLoaiPhong` int(11) NOT NULL,
   `IDKhuTro` int(11) NOT NULL,
-  `IDChuTro` int(11) NOT NULL,
-  `IDKhach` int(11) NOT NULL
+  `IDKhach` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `phong`
+--
+
+INSERT INTO `phong` (`IDPhong`, `STT`, `TinhTrang`, `IDLoaiPhong`, `IDKhuTro`, `IDKhach`) VALUES
+(859197, 11, '0', 254150, 31005038, NULL);
 
 -- --------------------------------------------------------
 
@@ -204,8 +220,7 @@ ALTER TABLE `phong`
   ADD PRIMARY KEY (`IDPhong`),
   ADD KEY `IDKhach` (`IDKhach`),
   ADD KEY `IDLoaiphong1` (`IDLoaiPhong`),
-  ADD KEY `IDKhuTro2` (`IDKhuTro`),
-  ADD KEY `IDChuTro2` (`IDChuTro`);
+  ADD KEY `IDKhuTro2` (`IDKhuTro`);
 
 --
 -- Indexes for table `truongdh_cd`
@@ -246,13 +261,13 @@ ALTER TABLE `khutro`
 -- AUTO_INCREMENT for table `loaiphong`
 --
 ALTER TABLE `loaiphong`
-  MODIFY `IDLoaiPhong` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDLoaiPhong` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=915065;
 
 --
 -- AUTO_INCREMENT for table `phong`
 --
 ALTER TABLE `phong`
-  MODIFY `IDPhong` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IDPhong` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=859198;
 
 --
 -- AUTO_INCREMENT for table `truongdh_cd`
@@ -287,7 +302,6 @@ ALTER TABLE `khutro`
 -- Constraints for table `phong`
 --
 ALTER TABLE `phong`
-  ADD CONSTRAINT `IDChuTro2` FOREIGN KEY (`IDChuTro`) REFERENCES `chutro` (`IDChuTro`),
   ADD CONSTRAINT `IDKhach` FOREIGN KEY (`IDKhach`) REFERENCES `khachhang` (`IDKhach`),
   ADD CONSTRAINT `IDKhuTro2` FOREIGN KEY (`IDKhuTro`) REFERENCES `khutro` (`IDKhuTro`),
   ADD CONSTRAINT `IDLoaiphong1` FOREIGN KEY (`IDLoaiPhong`) REFERENCES `loaiphong` (`IDLoaiPhong`);
