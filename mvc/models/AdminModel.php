@@ -55,6 +55,17 @@ class AdminModel extends DB
         $query = mysqli_query($this->conn, $sql);
         return $query;
     }
+    public function Them_TruongDH($idtruong, $tentruong, $kinhdo,  $vido, $diachi, $target_file)
+    {
+        $sql = "insert into `truongdh_cd` (IDTruong, TenTruong, KinhDo, ViDo, DiaChi, Icon) values ('$idtruong', '$tentruong', '$kinhdo', '$vido', '$diachi', '$target_file')";
+        $query = mysqli_query($this->conn, $sql);
+        return $query;
+    }
+    public function DS_TruongDH(){
+        $sql = "SELECT * FROM truongdh_cd"; 
+        $query = mysqli_query($this->conn, $sql);
+        return $query;
+    }
     // public function editTaikhoan($uid)
     // {
     //     $sql = "SELECT * FROM taikhoan WHERE `uid` = $uid";
