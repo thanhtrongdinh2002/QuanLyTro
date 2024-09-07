@@ -78,8 +78,11 @@ class admin extends Controller
             $diachi = $_POST["DiaChi"];
             $kinhdo = $_POST["KinhDo"];
             $vido = $_POST["ViDo"];
+            $tinh = $_POST["tinh"];
+            $quan = $_POST["quan"];
+            $phuong = $_POST["phuong"];
             $idchutro = $_COOKIE["idchutro"];
-            $this->show->Them_KhuTro($idkhutro, $tenkhutro, $diachi, $kinhdo, $vido, $idchutro);
+            $this->show->Them_KhuTro($idkhutro, $tenkhutro, $diachi, $kinhdo, $vido, $idchutro, $tinh, $quan, $phuong);
             $result = $this->show->DS_KhuTro($idchutro);
             $this->view("master1", [
                 "Page" => "DS_KhuTro",
@@ -158,12 +161,15 @@ class admin extends Controller
             $kinhdo = $_POST["KinhDo"];
             $vido = $_POST["ViDo"];
             $diachi = $_POST["DiaChi"];
+            $tinh = $_POST["tinh"];
+            $quan = $_POST["quan"];
+            $phuong = $_POST["phuong"];
 
             $target_dir = "public/images/";
             $target_file = $target_dir . basename($_FILES["Icon"]["name"]);
             if (move_uploaded_file($_FILES["Icon"]["tmp_name"], $target_file)) {
                 $target_file = basename($_FILES["Icon"]["name"]);
-                $this->show->Them_TruongDH($idtruong, $tentruong, $kinhdo,  $vido, $diachi, $target_file);
+                $this->show->Them_TruongDH($idtruong, $tentruong, $kinhdo,  $vido, $diachi, $target_file, $tinh, $quan, $phuong);
                 $result = $this->show->DS_TruongDH();
                 return $this->view("master1", [
                     "Page" => "DS_TruongDH",
@@ -189,4 +195,11 @@ class admin extends Controller
         $khutro = $this->show->DS_KhuTro($idchutro);
         $truongdh = $this->show->DS_TruongDH();
     }
+    public function index()
+    {
+        return $this->view("master1", [
+            "Page" => "index",
+        ]);
+    }
+    
 }
